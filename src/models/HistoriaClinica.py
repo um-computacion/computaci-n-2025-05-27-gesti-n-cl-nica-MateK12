@@ -1,6 +1,6 @@
-from Paciente import Paciente
-from Turno import Turno
-from Receta import Receta
+from models.Paciente import Paciente
+from models.Turno import Turno
+from models.Receta import Receta
 class HistoriaClinica:
     def __init__(self, paciente,):
         self.__paciente__ = paciente
@@ -8,39 +8,38 @@ class HistoriaClinica:
         self.__recetas__:list[Receta] = []
     
     def agregar_turno(self, turno):
-        self.__turnos.append(turno)
+        self.__turnos__.append(turno)
     
-    def agregar_receta(self, receta):
+    def agregar_receta(self, receta:Receta):
 
-        self.__recetas.append(receta)
+        self.__recetas__.append(receta)
     
-    # 📄 Acceso a Información
     def obtener_turnos(self):
 
-        return self.__turnos
+        return self.__turnos__
     
     def obtener_recetas(self):
-        return self.__recetas
+        return self.__recetas__
     
     def __str__(self):
         
         resultado = f"=== HISTORIA CLÍNICA ===\n"
-        resultado += f"Paciente: {self.__paciente}\n"
-        resultado += f"Número de turnos: {len(self.__turnos)}\n"
-        resultado += f"Número de recetas: {len(self.__recetas)}\n\n"
+        resultado += f"Paciente: {self.__paciente__}\n"
+        resultado += f"Número de turnos: {len(self.__turnos__)}\n"
+        resultado += f"Número de recetas: {len(self.__recetas__)}\n\n"
         
-        if self.__turnos:
+        if self.__turnos__:
             resultado += "--- TURNOS ---\n"
-            for i, turno in enumerate(self.__turnos, 1):
+            for i, turno in enumerate(self.__turnos__, 1):
                 resultado += f"{i}. {turno}\n"
         else:
             resultado += "--- TURNOS ---\nNo hay turnos registrados.\n"
         
         resultado += "\n"
         
-        if self.__recetas:
+        if self.__recetas__:
             resultado += "--- RECETAS ---\n"
-            for i, receta in enumerate(self.__recetas, 1):
+            for i, receta in enumerate(self.__recetas__, 1):
                 resultado += f"{i+1}. {receta}\n"
         else:
             resultado += "--- RECETAS ---\nNo hay recetas registradas.\n"
