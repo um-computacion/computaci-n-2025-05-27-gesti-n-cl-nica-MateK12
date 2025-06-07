@@ -7,7 +7,6 @@ class Especialidad():
     def verificar_dia(self,dia:str)-> bool:
         dia = dia.lower()
         arr = [ d.lower() for d in  self.__dias__ ]
-        print(self.__dias__)
         if dia in arr:
             return True
         else:
