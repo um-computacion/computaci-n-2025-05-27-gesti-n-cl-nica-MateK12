@@ -1,14 +1,14 @@
-from models.Clinica import Clinica
-from models.Paciente import Paciente
-from models.Medico import Medico
-from models.Turno import Turno
-from models.Receta import Receta
+from src.models.Clinica import Clinica
+from src.models.Paciente import Paciente
+from src.models.Medico import Medico
+from src.models.Turno import Turno
+from src.models.Receta import Receta
 from datetime import datetime
-from models.Especialidad import Especialidad
-from exceptions.MedicoNoDisponibleException import MedicoNoDisponibleException
-from exceptions.PacienteNoEncontradoException import PacienteNoEncontradoException
-from exceptions.RecetaInvalidaException import RecetaInvalidaException
-from exceptions.TurnoOcupadoException import TurnoOcupadoException
+from src.models.Especialidad import Especialidad
+from src.exceptions.MedicoNoDisponibleException import MedicoNoDisponibleException
+from src.exceptions.PacienteNoEncontradoException import PacienteNoEncontradoException
+from src.exceptions.RecetaInvalidaException import RecetaInvalidaException
+from src.exceptions.TurnoOcupadoException import TurnoOcupadoException
 
 
 
@@ -43,13 +43,13 @@ def agendar_turno():
     print(turno)
 
 def agregar_especialidad():
-    nombre:str = input('Ingrese el nombre de la especialidad')
-    matricula:str = input('Ingrese la matricula del medico')
+    nombre:str = input('Ingrese el nombre de la especialidad: ')
+    matricula:str = input('Ingrese la matricula del medico: ')
     medico:Medico = clinica.obtener_medico_por_matricula(matricula)
     ele:bool = True
     dias:list[str] =[]
     while ele:
-        dia = input('Ingrese el dia para esa especialidad (para dejar de elejir, escriba 0)')
+        dia = input('Ingrese el dia para esa especialidad (para dejar de elejir, escriba 0) ')
         if dia =='0':
             ele=False
         else:   
@@ -59,12 +59,12 @@ def agregar_especialidad():
     print('Especialidad ingresada con exito !!')
 
 def emitir_receta():
-    dni = input('Ingrese el DNI del paciente')
-    matricula = input('Ingrese la matricula del medico')
+    dni = input('Ingrese el DNI del paciente: ')
+    matricula = input('Ingrese la matricula del medico: ')
     ele:bool = True
     medicamentos:list[str] =[]
     while ele:
-        med = input('Ingrese los medicamentos para esta receta (para dejar de elejir, escriba 0)')
+        med = input('Ingrese los medicamentos para esta receta (para dejar de elejir, escriba 0): ')
         if med =='0':
             ele=False
         else:
@@ -72,7 +72,7 @@ def emitir_receta():
     clinica.emitir_receta(dni,matricula,medicamentos)
     print('Receta emitida con exito!!')
 def ver_historia_clinica():
-    dni = input('ingrese dni del paciente')
+    dni = input('ingrese dni del paciente ')
     print(clinica.obtener_historia_clinica(dni))
 
 def ver_turnos():
@@ -109,7 +109,7 @@ if __name__ == '__main__':
     0) Salir\n
     ''')
     while eligiendo:
-        seleccion = int(input('¿Que quiere hacer?'))
+        seleccion = int(input('¿Que quiere hacer? '))
         match seleccion:
             case 0:
                 eligiendo = False
@@ -137,6 +137,8 @@ if __name__ == '__main__':
                     agregar_especialidad()
                 except MedicoNoDisponibleException as mnd:
                     print(mnd)
+                except ValueError as v:
+                    print(v)
             case 5:
                 try:
                     emitir_receta()
@@ -149,8 +151,8 @@ if __name__ == '__main__':
             case 6:
                 try:
                     ver_historia_clinica()
-                except PacienteNoEncontradoException:
-                    print('paciente no encontrado')
+                except PacienteNoEncontradoException as pn:
+                    print(pn)
 
             case 7:
                 ver_turnos()

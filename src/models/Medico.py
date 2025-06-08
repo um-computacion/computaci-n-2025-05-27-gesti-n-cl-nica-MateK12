@@ -1,4 +1,4 @@
-from models.Especialidad import Especialidad
+from src.models.Especialidad import Especialidad
 class Medico:
     
     def __init__(self, nombre: str, matricula: str):
@@ -7,7 +7,8 @@ class Medico:
         self.__especialidades__:list[Especialidad] = []
     
     def agregar_especialidad(self, especialidad:Especialidad) -> None:
-
+        if especialidad.obtener_especialidad() in [e.obtener_especialidad() for e in self.__especialidades__ ]:
+            raise ValueError('Especialidad repetida')
         self.__especialidades__.append(especialidad)
     
     def obtener_matricula(self) -> str:
