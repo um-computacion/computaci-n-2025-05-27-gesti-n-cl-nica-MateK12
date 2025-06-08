@@ -40,10 +40,6 @@ class Clinica:
     def obtener_pacientes(self) -> List['Paciente']:
         return list(self.__pacientes__.values())
     
-    def obtener_paciente_por_dni(self,dni:str):
-        if dni not in self.__pacientes__:
-            raise ValueError(f"No se ha econtrado un paciente con dni {dni}")
-        return self.__pacientes__[dni]
     
     def obtener_medicos(self) -> List['Medico']:
 

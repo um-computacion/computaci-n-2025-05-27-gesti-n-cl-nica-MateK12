@@ -39,8 +39,6 @@ def agendar_turno():
     fecha_object = datetime.strptime(fecha, '%d-%m-%Y %H:%M')
     clinica.agendar_turno(dni,matricula,especialidad,fecha_object)
     turno = clinica.obtener_turnos()[-1]
-    # paciente = clinica.obtener_paciente_por_dni(dni)
-    # medico = clinica.obtener_medico_por_matricula(matricula)
     print('turno agendado con exito!!')    
     print(turno)
 
@@ -54,8 +52,8 @@ def agregar_especialidad():
         dia = input('Ingrese el dia para esa especialidad (para dejar de elejir, escriba 0)')
         if dia =='0':
             ele=False
-        dias.append(dia)
-
+        else:   
+            dias.append(dia)
     especialidad = Especialidad(nombre,dias)
     medico.agregar_especialidad(especialidad)
     print('Especialidad ingresada con exito !!')
@@ -69,7 +67,8 @@ def emitir_receta():
         med = input('Ingrese los medicamentos para esta receta (para dejar de elejir, escriba 0)')
         if med =='0':
             ele=False
-        medicamentos.append(med)
+        else:
+            medicamentos.append(med)
     clinica.emitir_receta(dni,matricula,medicamentos)
     print('Receta emitida con exito!!')
 def ver_historia_clinica():
@@ -115,25 +114,44 @@ if __name__ == '__main__':
             case 0:
                 eligiendo = False
             case 1:
-                agregar_paciente()
+                try:
+                    agregar_paciente()
+                except ValueError as v:
+                    print(v)
             case 2:
-                agregar_medico()
+                try:
+                    agregar_medico()
+                except ValueError as v:
+                    print(v)
             case 3:
                 try:
                     agendar_turno()
-                except MedicoNoDisponibleException:
-                    print('El medico no esta disponible')
-                except PacienteNoEncontradoException:
-                    print('El paciente no fue encontrado')
+                except MedicoNoDisponibleException as med:
+                    print(med)
+                except PacienteNoEncontradoException as p_no_encontrado:
+                    print(p_no_encontrado)
+                except TurnoOcupadoException as to:
+                    print(TurnoOcupadoException)
             case 4:
-                agregar_especialidad()
+                try:
+                    agregar_especialidad()
+                except MedicoNoDisponibleException as mnd:
+                    print(mnd)
             case 5:
-                emitir_receta()
+                try:
+                    emitir_receta()
+                except RecetaInvalidaException as ri:
+                    print(ri)
+                except PacienteNoEncontradoException as p_no_encontrado:
+                    print(p_no_encontrado)
+                except MedicoNoDisponibleException as mnd:
+                    print(mnd)
             case 6:
                 try:
                     ver_historia_clinica()
                 except PacienteNoEncontradoException:
                     print('paciente no encontrado')
+
             case 7:
                 ver_turnos()
             case 8:
