@@ -52,9 +52,10 @@ class Test_clinica(unittest.TestCase):
 
 
     def test_especialidad_con_dias_invalidos(self):
-        especialidad_invalida = Especialidad("Gastro", ["abcd"])
-        self.medico.agregar_especialidad(especialidad_invalida)
-        self.assertIsNone(self.medico.obtener_especialidad_para_dia("viernes"))
+        with self.assertRaises(ValueError):
+            especialidad_invalida = Especialidad("Gastro", ["abcd"])
+            self.medico.agregar_especialidad(especialidad_invalida)
+            self.assertIsNone(self.medico.obtener_especialidad_para_dia("viernes"))
 
     def test_error_agregar_especialidad_a_medico_no_existente(self):
         clinica = Clinica()
