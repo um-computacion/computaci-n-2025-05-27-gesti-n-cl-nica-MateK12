@@ -1,14 +1,14 @@
 from datetime import datetime
 from typing import Dict, List
-from models.Paciente import Paciente
-from models.Medico import Medico
-from models.Turno import Turno
-from models.Receta import Receta
-from models.HistoriaClinica import HistoriaClinica
-from exceptions.MedicoNoDisponibleException import MedicoNoDisponibleException
-from exceptions.PacienteNoEncontradoException import PacienteNoEncontradoException
-from exceptions.RecetaInvalidaException import RecetaInvalidaException
-from exceptions.TurnoOcupadoException import TurnoOcupadoException
+from src.models.Paciente import Paciente
+from src.models.Medico import Medico
+from src.models.Turno import Turno
+from src.models.Receta import Receta
+from src.models.HistoriaClinica import HistoriaClinica
+from src.exceptions.MedicoNoDisponibleException import MedicoNoDisponibleException
+from src.exceptions.PacienteNoEncontradoException import PacienteNoEncontradoException
+from src.exceptions.RecetaInvalidaException import RecetaInvalidaException
+from src.exceptions.TurnoOcupadoException import TurnoOcupadoException
 
 
 class Clinica:
@@ -18,7 +18,6 @@ class Clinica:
         self.__medicos__: Dict[str, 'Medico'] = {}
         self.__turnos__: List['Turno'] = []
         self.__historias_clinicas__: Dict[str, 'HistoriaClinica'] = {}
-    
     
     def agregar_paciente(self, paciente: 'Paciente') -> None:
 

@@ -1,5 +1,5 @@
-from models.Medico import Medico
-from models.Paciente import Paciente
+from src.models.Medico import Medico
+from src.models.Paciente import Paciente
 from datetime import datetime
 
 class Receta():
