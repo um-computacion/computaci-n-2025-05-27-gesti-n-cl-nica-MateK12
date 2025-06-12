@@ -8,10 +8,10 @@ para ejecutar el programa: `python3 app.py en` el mismo directorio
 ## 📦 Organización del Código
 
 - `src/models/`: contiene las clases principales
-- `app.py`: archivo para ejecutar el sistema que maneja la entrada y salida de informacion del usuario. Este archivo llama a los metodos de la clase clinica, y muestra los resultados.
+- `app.py`: archivo para ejecutar el sistema que maneja la entrada y salida de informacion del usuario. Este archivo tiene una clase `CLI` que tiene metodos que llaman a los metodos de la clase `Clinica`, y muestra los resultados.
 - `src/exceptions/`: define las excepciones personalizadas
 - `tests/`:estan todos los tests, para cada clase 
-- `Clinica`: clase central que maneja las operaciones principales
+- `Clinica`: clase central que maneja las operaciones principales como registrar turno, agregar paciente, etc.
 
 La clase principal `Clinica` tiene todos los metodos para que funcione el sistema, incluida validaciones que levantaran excepciones en caso de ser necesarios
 
